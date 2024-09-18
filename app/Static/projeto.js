@@ -1,3 +1,46 @@
+class MobileNavbar{
+  constructor(mobileManu, navList, navLink){
+    this.mobileManu = document.querySelector(mobileManu);
+    this.navList = document.querySelector(navList);
+    this.navLink = document.querySelectorAll(navLink);
+    this.activeClass = 'active';
+
+    this.handleClick = this.handleClick.bind(); 
+  }
+
+  animateLinks(){
+    this.navLink.forEach((link, index) => {
+      link.style.animation
+        ? (link.style.animation = "")
+        : (link.style.animation = 'navLinkFade 0.5s ease forwards 0.3s');
+    });
+  }
+
+  handleClick(){
+    this.navList.classList.toggle(this.activeClass);
+    this.mobileManu.classList.toggle(this.activeClass);
+    this.animateLinks();
+  }
+
+  addClickEvent(){
+    this.mobileManu.addEventListener('click', this.handleClick);
+  }
+
+  init(){
+    if(this.mobileManu){
+      this.addClickEvent();
+    }
+    return this;
+  }
+}
+
+const mobileNavbar = new MobileNavbar(
+  ".mobile-menu",
+  ".nav-list",
+  ".nav-list li",
+);
+mobileNavbar.init();
+
 // Função para mostrar ou esconder o texto da sinopse
 function toggleText(card) {
     // Seleciona a div com a classe 'hidden' dentro do card clicado
@@ -19,20 +62,3 @@ function toggleText(card) {
     }
   }
 
-// Função do carrossel
-const imgs = document.getElementById('img');
-const img = document.querySelectorAll('#img img');
-
-let idx = 0;
-
-function carrossel() {
-  idx++;
-
-  if (idx > img.length - 1){  //Voltara para a imagem inicial
-    idx = 0;  
-  }
-
-  imgs.style.transform = `translateX(${-idx * 900}px)`
-}
-
-setInterval(carrossel, 1800);
