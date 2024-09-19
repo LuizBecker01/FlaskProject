@@ -1,17 +1,32 @@
-from flask import Flask, jsonify, request, render_template, Blueprint, current_user
+from flask import Flask, jsonify, request, render_template, Blueprint
+from flask_login import current_user
+from sqlalchemy import create_engine, update, and_
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm.attributes import flag_modified
 from flask_sqlalchemy import SQLAlchemy
 from models import User
-from db import db
 
+db = SQLAlchemy()
+
+db_string = "postgresql://postgres:2404@localhost:5432/CNMD"
+db_ = create_engine(db_string)
+Base = declarative_base()
+Session = sessionmaker(db_)
+session = Session()
+Base.metadata.create_all(db_)
 
 app = Flask(__name__)
 
-dc = SQLAlchemy()
+db.init_app(app)
 
 blueprint = Blueprint('api', __name__, url_prefix='/api')
 
 @app.route('/')  
 def homepage():
+    users = User.query.all()
+    for user in users:
+        print(user.username)
     return render_template ("index.html")
 
 # Rota para criar um novo usuário
