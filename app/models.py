@@ -1,23 +1,23 @@
-# from copyreg import dispatch_table
-# from flask_login import UserMixin
-# from sqlalchemy import LargeBinary, Column, Integer, String, DateTime, ARRAY, Time, and_, or_
+from flask_sqlalchemy import SQLAlchemy
 
-# from app import db, login_manager
+# Instância do SQLAlchemy
+db = SQLAlchemy()
 
-# from app.base.util import hash_pass
-# import datetime
+class User(db.Model):
+    __tablename__ = 'users'  # Nome da tabela no banco de dados
+    
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+    
+    def __init__(self, username, email, password):
+        self.username = username
+        self.email = email
+        self.password = password
+    
+    # Método opcional para representação do objeto
+    def __repr__(self):
+        return f'<User {self.username}>'
 
-# ACCESS = {
-#     'user': 0,
-#     'admin': 1,
-#     'engineer': 2,
-#     'button': 3
-# }
 
-# class User(db.Model, UserMixin):
-
-#     __tablename__ = 'User'
-
-#     id = Column(Integer, primary_key=True)
-#     username = Column(String, unique=True)
-#     email = Column(S
