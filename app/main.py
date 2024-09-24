@@ -1,26 +1,33 @@
 from flask import Flask, jsonify, request, render_template, Blueprint
 from flask_login import current_user
 from sqlalchemy import create_engine, update, and_
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.attributes import flag_modified
 from flask_sqlalchemy import SQLAlchemy
 from models import User
 
-db = SQLAlchemy()
-
-db_string = "postgresql://postgres:2404@localhost:5432/CNMD"
-db_ = create_engine(db_string)
-Base = declarative_base()
-Session = sessionmaker(db_)
-session = Session()
-Base.metadata.create_all(db_)
 
 app = Flask(__name__)
 
-db.init_app(app)
+# Definir a URI de conexão com o banco de dados
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:2404@localhost:5432/CNMD"
+
+db_ = SQLAlchemy(app)
+
+# Crie o engine do SQLAlchemy manualmente se precisar de um para a sessão
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+session = Session()
+
+Base.metadata.create_all(engine)
+
+db_.init_app(app)
 
 blueprint = Blueprint('api', __name__, url_prefix='/api')
+
+app.register_blueprint(blueprint)
 
 @app.route('/')  
 def homepage():
@@ -44,8 +51,8 @@ def create_user():
     new_user = User(username=username, password=password)
     
     # Adiciona o novo usuário ao banco de dados
-    db.session.add(new_user)
-    db.session.commit()
+    db_.session.add(new_user)
+    db_.session.commit()
 
     return jsonify(message='Usuário '+username+' criado com sucesso!', created=1)
 
@@ -58,8 +65,8 @@ def delete_user():
     else:
         user = User.query.filter_by(username=username).first()
         
-        db.session.delete(user)
-        db.session.commit()
+        db_.session.delete(user)
+        db_.session.commit()
 
         return jsonify(message='Usuário '+username+' deletado com sucesso!', deleted=1)
 
