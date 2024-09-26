@@ -12,7 +12,7 @@ app = Flask(__name__)
 # Definir a URI de conexão com o banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2404@localhost:5432/CNMD'
 
-db_ = SQLAlchemy(app)  # Já inicializa o SQLAlchemy aqui, não precisa do init_app
+db_ = SQLAlchemy(app)
 
 # Crie o engine do SQLAlchemy manualmente se precisar de um para a sessão
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
@@ -30,10 +30,6 @@ main = Blueprint('main', __name__)
 def homepage():
     users = User.query.all()
     return render_template('index.html', users=users)
-
-    # for user in users:
-    #     print(user.username)
-    # return render_template("index.html")
 
 # Rota para criar um novo usuário
 @blueprint.route('/create_user', methods=['POST'])
