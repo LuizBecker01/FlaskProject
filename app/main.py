@@ -32,7 +32,7 @@ def homepage():
     return render_template('index.html', users=users)
 
 # Rota para criar um novo usuário
-@blueprint.route('/create_user', methods=['POST'])
+@blueprint.route('/api/create_user', methods=['POST'])
 def create_user():
     username = request.form['username']
     email = request.form['email']
@@ -52,7 +52,7 @@ def create_user():
     return jsonify(message='Usuário '+username+' criado com sucesso!', created=1)
 
 # Rota para deletar um usuário
-@blueprint.route('/delete_user', methods=['POST'])
+@blueprint.route('/api/delete_user', methods=['POST'])
 def delete_user():
     username = request.form['username']
     if current_user.username == username:
@@ -68,4 +68,4 @@ def delete_user():
 app.register_blueprint(blueprint)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+     app.run(debug=True)
