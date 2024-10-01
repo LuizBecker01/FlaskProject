@@ -5,7 +5,7 @@ from sqlalchemy import create_engine, update, and_
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.attributes import flag_modified
-from .models import User
+from app.models import User
 
 app = Flask(__name__)
 
@@ -30,6 +30,10 @@ main = Blueprint('main', __name__)
 def index():
     users = User.query.all()
     return render_template('index.html', users=users)
+
+@blueprint.route('/about')
+def about():
+    return 'About Page'
 
 # Rota para criar um novo usuário
 @blueprint.route('/api/create_user', methods=['POST'])
@@ -65,7 +69,8 @@ def delete_user():
 
         return jsonify(message='Usuário '+username+' deletado com sucesso!', deleted=1)
 
-app.register_blueprint(blueprint)
+# app.register_blueprint(blueprint)
 
-if __name__ == "__main__":
-     app.run(debug=True)
+# if __name__ == "__main__":
+     
+#      app.run(host="0.0.0.0", port=8001 ,debug=True)
