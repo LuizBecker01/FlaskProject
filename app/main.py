@@ -27,7 +27,7 @@ blueprint = Blueprint('api', __name__, url_prefix='/api')
 main = Blueprint('main', __name__)
 
 @app.route('/')  
-def homepage():
+def index():
     users = User.query.all()
     return render_template('index.html', users=users)
 
