@@ -12,7 +12,7 @@ blueprint = Blueprint('api', __name__, url_prefix='/api')
 
 app = Flask(__name__)
 
-# Definir a URI de conexão com o banco de dados
+# Defini a URI de conexão com o banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2404@localhost:5432/CNMD'
 
 db_ = SQLAlchemy(app)
