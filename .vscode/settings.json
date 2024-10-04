@@ -5,7 +5,7 @@
       "server": "localhost",
       "port": 5432,
       "driver": "PostgreSQL",
-      "name": "PG Local",
+      "name": "CNMD",
       "database": "CNMD",
       "username": "postgres",
       "password": "2404",
