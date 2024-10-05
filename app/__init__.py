@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import current_user
 from sqlalchemy import create_engine, update, and_

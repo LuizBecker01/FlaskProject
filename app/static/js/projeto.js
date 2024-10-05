@@ -41,7 +41,7 @@ const mobileNavbar = new MobileNavbar(
 );
 mobileNavbar.init();
 
-// Função para mostrar ou esconder o texto da sinopse
+// Função para mostrar ou esconder o texto da sinapse
 function toggleText(card) {
     // Seleciona a div com a classe 'hidden' dentro do card clicado
     const moreText = card.querySelector('.hidden');

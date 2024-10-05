@@ -11,6 +11,18 @@ def index():
     users = User.query.all()
     return render_template('index.html', users=users)
 
+# Rota para login
+@blueprint.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+
+    user = User.query.filter_by(username=username).first()
+    if user and user.password == password:
+        return jsonify(message='Login bem-sucedido!', logged=1)
+    else:
+        return jsonify(message='Credenciais inválidas!', logged=0)
+
 # Rota para criar um novo usuário
 @blueprint.route('/create_user', methods=['POST'])
 def create_user():
@@ -31,12 +43,8 @@ def create_user():
 
     return jsonify(message='Usuário criado com sucesso!', created=1)
 
-# Rota para deletar um usuário (opcional, comentada por enquanto)
-
 # Registra os blueprints
 def register_blueprints(app):
     app.register_blueprint(main)
     app.register_blueprint(blueprint)
 
-# if __name__ == "__main__": 
-#      app.run(host="0.0.0.0", port=8001 ,debug=True)
