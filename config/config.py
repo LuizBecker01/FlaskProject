@@ -1,2 +1,0 @@
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:2404@localhost:5432/CNMD'
-SQLALCHEMY_TRACK_MODIFICATIONS = False
