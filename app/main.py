@@ -53,22 +53,3 @@ def create_user():
     db_.session.commit()
 
     return jsonify(message='Usuário '+username+' criado com sucesso!', created=1)
-
-# Rota para deletar um usuário
-# @blueprint.route('/api/delete_user', methods=['POST'])
-# def delete_user():
-#     username = request.form['username']
-#     if current_user.username == username:
-#         return jsonify(message='Voce não pode deletar o usuário atual', deleted=0)
-    
-#     user = User.query.filter_by(username=username).first()    
-#     db_.session.delete(user)
-#     db_.session.commit()
-
-#     return jsonify(message='Usuário '+username+' deletado com sucesso!', deleted=1)
-
-# app.register_blueprint(blueprint)
-
-# if __name__ == "__main__":
-     
-#      app.run(host="0.0.0.0", port=8001 ,debug=True)
