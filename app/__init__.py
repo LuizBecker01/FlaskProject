@@ -1,6 +1,7 @@
 from flask import Flask
-from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
+from config import config
+from flask import render_template
 from flask_login import current_user
 from sqlalchemy import create_engine, update, and_
 from sqlalchemy.orm import declarative_base
@@ -8,14 +9,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.attributes import flag_modified
 
 db = SQLAlchemy()
-
-# Crie o engine do SQLAlchemy manualmente se precisar de um para a sessão
-# engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-# Base = declarative_base()
-# Session = sessionmaker(bind=engine)
-# session = Session()
-
-# Base.metadata.create_all(engine)
 
 def create_app():
     app = Flask(__name__)

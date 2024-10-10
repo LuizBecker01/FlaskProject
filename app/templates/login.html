@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="app/static/css/login.css">
-    <title>Página de Login</title>
 
     <style>
         body {
@@ -18,10 +17,10 @@
         }
         .login-container {
             background-color: #fff;
-            padding: 20px;
+            padding: 50px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 400px;
         }
         h2 {
             text-align: center;
@@ -29,8 +28,9 @@
         }
         .login-container label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
+        .login-container input[type="text"],
         .login-container input[type="email"],
         .login-container input[type="password"] {
             width: 100%;
@@ -40,7 +40,7 @@
             border-radius: 4px;
         }
         .login-container button {
-            width: 100%;
+            width: 98%;
             padding: 10px;
             background-color: #4CAF50;
             color: white;
@@ -57,6 +57,9 @@
     <div class="login-container">
         <h2>Login</h2>
         <form action="/login" method="POST">
+            <label for="username">Nome:</label>
+            <input type="text" id="username" name="username" required>
+
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" required>
 
@@ -64,6 +67,8 @@
             <input type="password" id="password" name="password" required>
 
             <button type="submit">Entrar</button>
+            <button type="submit">Criar conta</button>
+
         </form>
     </div>
 </body>

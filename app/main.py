@@ -12,16 +12,18 @@ def index():
     return render_template('index.html', users=users)
 
 # Rota para login
-@blueprint.route('/login', methods=['POST'])
+@main.route('/login', methods=['GET', 'POST'])
 def login():
-    username = request.form['username']
-    password = request.form['password']
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
 
-    user = User.query.filter_by(username=username).first()
-    if user and user.password == password:
-        return jsonify(message='Login bem-sucedido!', logged=1)
-    else:
-        return jsonify(message='Credenciais inválidas!', logged=0)
+        user = User.query.filter_by(username=username).first()
+        if user and user.password == password:
+            return jsonify(message='Login bem-sucedido!', logged=1)
+        else:
+            return jsonify(message='Credenciais inválidas!', logged=0)
+    return render_template('login.html') 
 
 # Rota para criar um novo usuário
 @blueprint.route('/create_user', methods=['POST'])
@@ -35,7 +37,8 @@ def create_user():
     if user:
         return jsonify(message='Usuário já existe!', created=0)
 
-    new_user = User(username=username, email=email, password=password)
+    new_user = User(username=username, email=email)
+    new_user.set_password(password)
 
     # Adiciona o novo usuário ao banco de dados
     db.session.add(new_user)
