@@ -1,12 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from config import config
-from flask import render_template
-from flask_login import current_user
-from sqlalchemy import create_engine, update, and_
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm.attributes import flag_modified
 
 db = SQLAlchemy()
 
@@ -16,7 +9,6 @@ def create_app():
     # Configurações do app
     app.config.from_object('config.config')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2404@localhost:5432/CNMD'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Inicializa o SQLAlchemy com app
     db.init_app(app)
