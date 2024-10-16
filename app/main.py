@@ -30,6 +30,11 @@ def login():
             return jsonify(message='Credenciais inválidas!', logged=0)
     return render_template('login.html')
 
+#Rota para Sobre
+@main.route('/sobre')
+def sobre():
+    return render_template('sobre.html')
+
 # Rota para criar um novo usuário
 @blueprint.route('/create_user', methods=['POST'])
 def create_user():
