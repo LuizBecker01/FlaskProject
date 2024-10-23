@@ -8,7 +8,7 @@
       "name": "CNMD",
       "database": "CNMD",
       "username": "postgres",
-      "password": "2404",
+      "password": "luiz",
       "connectionTimeout": 30
     }
   ]

@@ -5,8 +5,27 @@ from app.models import User
 main = Blueprint('main', __name__)
 blueprint = Blueprint('api', __name__, url_prefix='/api')
 
+<<<<<<< Updated upstream
 # Rota principal
 @main.route('/')
+=======
+app = Flask(__name__)
+
+# Define a URI de conexão com o banco de dados
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2404@localhost:5432/CNMD'
+
+db_ = SQLAlchemy(app)
+
+# Crie o engine do SQLAlchemy manualmente se precisar de um para a sessão
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+session = Session()
+
+Base.metadata.create_all(engine)
+
+@app.route('/')  
+>>>>>>> Stashed changes
 def index():
     users = User.query.all()
     return render_template('index.html', users=users)
@@ -29,7 +48,13 @@ def create_user():
     username = request.form['username']
     email = request.form['email']
     password = request.form['password']
+<<<<<<< Updated upstream
 
+=======
+    
+    
+    
+>>>>>>> Stashed changes
     # Verifica se o usuário já existe
     user = User.query.filter_by(username=username).first()
     if user:
