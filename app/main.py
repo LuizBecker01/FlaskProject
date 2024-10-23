@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template, Blueprint 
+from flask import Flask, jsonify, request, render_template, Blueprint, session, redirect, url_for
 from app import db
 from app.models import User
 
@@ -31,16 +31,28 @@ def index():
     return render_template('index.html', users=users)
 
 # Rota para login
-@blueprint.route('/login', methods=['POST'])
+@main.route('/login', methods=['GET', 'POST'])
 def login():
-    username = request.form['username']
-    password = request.form['password']
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
 
-    user = User.query.filter_by(username=username).first()
-    if user and user.password == password:
-        return jsonify(message='Login bem-sucedido!', logged=1)
-    else:
-        return jsonify(message='Credenciais inválidas!', logged=0)
+        user = User.query.filter_by(username=username).first()
+        if user and user.check_password(password):
+         # Configurando a sessão do usuário
+            session['user_id'] = user.id
+            session['logged_in'] = True
+
+            # Redireciona para a página principal
+            return redirect(url_for('main.home'))
+        else:
+            return jsonify(message='Credenciais inválidas!', logged=0)
+    return render_template('login.html')
+
+#Rota para Sobre
+@main.route('/sobre')
+def sobre():
+    return render_template('sobre.html')
 
 # Rota para criar um novo usuário
 @blueprint.route('/create_user', methods=['POST'])

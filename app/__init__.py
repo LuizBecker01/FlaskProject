@@ -1,21 +1,7 @@
 from flask import Flask
-from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import current_user
-from sqlalchemy import create_engine, update, and_
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm.attributes import flag_modified
 
 db = SQLAlchemy()
-
-# Crie o engine do SQLAlchemy manualmente se precisar de um para a sessão
-# engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-# Base = declarative_base()
-# Session = sessionmaker(bind=engine)
-# session = Session()
-
-# Base.metadata.create_all(engine)
 
 def create_app():
     app = Flask(__name__)
@@ -23,7 +9,6 @@ def create_app():
     # Configurações do app
     app.config.from_object('config.config')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2404@localhost:5432/CNMD'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Inicializa o SQLAlchemy com app
     db.init_app(app)
