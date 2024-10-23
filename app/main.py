@@ -36,7 +36,7 @@ def sobre():
     return render_template('sobre.html')
 
 # Rota para criar um novo usuário
-@blueprint.route('/create_user', methods=['POST'])
+@main.route('/create_user', methods=['POST'])
 def create_user():
     # username = request.form['username']
     # email = request.form['email']

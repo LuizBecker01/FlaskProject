@@ -54,6 +54,9 @@ h2 {
     align-items: center;
 }
 
+.divBtn{
+    display: block;
+}
 .btnCreate {
     width: 35%;
     padding: 10px;
@@ -63,4 +66,5 @@ h2 {
     border-radius: 4px;
     cursor: pointer;
     align-items: center;
+
 }
