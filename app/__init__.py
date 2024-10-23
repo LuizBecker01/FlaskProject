@@ -8,7 +8,7 @@ def create_app():
 
     # Configurações do app
     app.config.from_object('config.config')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2404@localhost:5432/CNMD'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:luiz@localhost:5432/CNMD' #Trocar a senha
 
     # Inicializa o SQLAlchemy com app
     db.init_app(app)

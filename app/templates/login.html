@@ -8,15 +8,15 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form action="/login" method="POST">
+        <form class="form" action="/login" method="POST">
             <label for="username">Nome:</label>
             <input type="text" id="username" name="username" required>
 
             <label for="password">Senha:</label>
             <input type="password" id="password" name="password" required>
 
-            <button action="/" type="submit">Entrar</button>
-            <button action="/create_user" type="submit">Criar conta</button>
+            <button class="btnEnter" action="/" type="submit">Entrar</button>
+            <button class="btnCreate" action="/create_user" type="submit">Criar conta</button>
         </form>
     </div>
 </body>
