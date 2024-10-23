@@ -5,10 +5,10 @@ from app.models import User
 main = Blueprint('main', __name__)
 blueprint = Blueprint('api', __name__, url_prefix='/api')
 
-<<<<<<< Updated upstream
+
 # Rota principal
 @main.route('/')
-=======
+
 app = Flask(__name__)
 
 # Define a URI de conexão com o banco de dados
